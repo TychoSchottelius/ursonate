@@ -1,4 +1,8 @@
-// einleitung
+let ursonate = [];
+/*  ----------
+    einleitung
+    ----------
+*/
 let fuemms = "fümms";
 let boe = "bö";
 let woe = "wö";
@@ -13,21 +17,11 @@ let rrr = "rrrrrr";
 let bee = "beeeee";
 let einleitung_vers03_array01 = [dll, rrr, bee, boe];
 let einleitung_vers03_array02 = [fuemms, boe, woe, taeae, zaeae, uu];
-
 let einleitung_vers01 = `${fuemms} ${boe} ${woe} ${taeae} ${zaeae} ${uu}, ${poegiff}, ${kwii_ee}.`;
 let einleitung_vers02 = `${oooo}`
 let einleitung_vers03 = `${setup_einleitung_vers03()}`;
-
 let einleitung = `${einleitung_vers01}</br>${einleitung_vers02},</br>${einleitung_vers03}`;
-let erster_teil = `${einleitung_vers01}</br>`;
-
-let section_einleitung = document.getElementById("einleitung");
-let paragraph_einleitung = document.createElement('p');
-paragraph_einleitung.innerHTML = einleitung;
-let paragraph_erster_teil = document.createElement('p');
-paragraph_erster_teil.innerHTML = erster_teil;
-section_einleitung.appendChild(paragraph_einleitung);
-section_einleitung.appendChild(paragraph_erster_teil);
+ursonate.push(einleitung);
 
 // creating each line
 function setup_einleitung_vers03_zeile(array1, array2, line) {
@@ -60,6 +54,44 @@ function setup_einleitung_vers03(){
     }
     return result;
 }
+
+/*  ----------
+    erster Teil
+    ----------
+*/
+let erster_teil_vers02_start = 'dedesnn nn rrrrrr';
+let erster_teil_vers02_mid = 'li ee';
+let erster_teil_vers02_end = 'mpiff tillff too, tillll, jüü kaa';
+let kete = 'kete';
+let ra = 'ra';
+let rinnz = 'rinnz';
+let krmue = 'krrmüü';
+let ziuenzeziu = 'ziiuu ennze ziiuu';
+let erster_teil_vers04 = 'rrummpff tillff toooo';
+
+let erster_teil_vers02 = `${erster_teil_vers02_start}, ${erster_teil_vers02_mid}, ${erster_teil_vers02_end}?`
+let erster_teil_vers03 = setup_erster_teil_vers03();
+let erster_teil = `${einleitung_vers01}</br>${erster_teil_vers02}</br>${erster_teil_vers03}</br>${erster_teil_vers04}?`;
+ursonate.push(erster_teil);
+
+function setup_erster_teil_vers03() {
+    return `${rinnz}e${kete} ${double_bee()} ${rinnz.slice(2, 5)}${krmue}? ${ziuenzeziu} ${rinnz}${krmue}, ${ra}${kete} ${double_bee()}.`;
+}
+function double_bee(){
+    let resultString = '';
+    for(let i=0; i<2; i++){
+        resultString += `${bee} `;
+    }
+    return resultString.trim();
+}
+
+// create Ursonate
+let section_ursonate = document.getElementById("ursonate");
+ursonate.forEach(function (element) {
+    let paragraph = document.createElement('p');
+    paragraph.innerHTML = element;
+    section_ursonate.appendChild(paragraph);
+});
 
 // adds whitespace after each element
 function add_whitespaces_to_line(array) {
