@@ -9,13 +9,13 @@ const boe = "bö";
 const woe = "wö";
 const taeae = "tää";
 const zaeae = "zää";
-const uu = "uu";
+const uu = repeat_string('u', 2, false);
 const poegiff = "pögiff";
 const kwii = "kwii";
-const ee = 'ee';
-const oooo = "ooooooooooooooooooooooooooooooo";
+const ee = repeat_string('e', 2, false);
+const oooo = repeat_string('o', 32, false);
 const dll = "dll";
-const rrr = "rrrrrr";
+const rrr = repeat_string('r', 6, false);
 const bee = variation_of_ee('b');
 const einleitung_vers03_array01 = [dll, rrr, bee, boe];
 const einleitung_vers03_array02 = [fuemms, boe, woe, taeae, zaeae, uu];
@@ -57,9 +57,10 @@ function setup_einleitung_vers03(){
     erster Teil
     ----------
 */
-const erster_teil_vers02_start = 'dedesnn nn rrrrrr';
+const erster_teil_vers02_start = `dedesnn nn ${rrr}`;
 const erster_teil_vers02_mid = `li ${ee}`;
-const erster_teil_vers02_end = 'mpiff tillff too,</br>tillll,</br>jüü kaa';
+const ti = 'ti';
+const erster_teil_vers02_end = `mpiff ${ti}${repeat_string('l', 2, false)}${repeat_string('f', 2, false)} too,</br>${ti}${repeat_string('l', 4, false)},</br>jüü kaa`;
 const kete = 'kete';
 const ra = 'ra';
 const rinnz = 'rinnz';
@@ -84,7 +85,7 @@ ursonate.push(erster_teil_heading, erster_teil_subheading01, erster_teil_thema01
     erster_teil_thema02_content, erster_teil_subheading03, erster_teil_thema03_content, erster_teil_subheading04, erster_teil_thema04_content);
 
 function setup_erster_teil_vers03() {
-    return `${rinnz}e${kete} ${repeat_string(bee, 2)} ${erster_teil_vers03_a}?</br>${erster_teil_vers03_b},
+    return `${rinnz}e${kete} ${repeat_string(bee, 2, true)} ${erster_teil_vers03_a}?</br>${erster_teil_vers03_b},
 </br>${rakete_variation_of_ee('b')}.`;
 }
 
@@ -93,7 +94,7 @@ function rakete_variation_of_ee(char){
     let result_string = `${ra}${kete}`;
     let b = 'b';
     if (char === b) {
-        result_string += ` ${repeat_string(variation_of_ee(char), 2)}`;
+        result_string += ` ${repeat_string(variation_of_ee(char), 2, true)}`;
     }
     else {
         result_string += ` ${variation_of_ee(b)} ${variation_of_ee(char)}`;
@@ -147,10 +148,15 @@ function add_whitespaces_to_line(array, trim) {
     return line;
 }
 
-function repeat_string(string, factor){
+function repeat_string(string, factor, whitespaces){
     let resultString = '';
     for(let i=0; i<factor; i++){
-        resultString += `${string} `;
+        if (whitespaces) {
+            resultString += `${string} `;
+        }
+        else {
+            resultString += `${string}`;
+        }
     }
     return resultString.trim();
 }
