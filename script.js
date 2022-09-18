@@ -1,3 +1,4 @@
+// TODO: switch to Typescript and use enums for text-categories
 let ursonate = [];
 /*  ----------
     einleitung
@@ -14,14 +15,15 @@ let kwii_ee = "kwii Ee";
 let oooo = "ooooooooooooooooooooooooooooooo";
 let dll = "dll";
 let rrr = "rrrrrr";
-let bee = "beeeee";
+let bee = "bee";
 let einleitung_vers03_array01 = [dll, rrr, bee, boe];
 let einleitung_vers03_array02 = [fuemms, boe, woe, taeae, zaeae, uu];
-let einleitung_vers01 = `${fuemms} ${boe} ${woe} ${taeae} ${zaeae} ${uu}, ${poegiff}, ${kwii_ee}.`;
+let einleitung_vers01 = `${fuemms} ${boe} ${woe} ${taeae} ${zaeae} ${uu},</br>${poegiff},</br>${kwii_ee}.`;
 let einleitung_vers02 = `${oooo}`
 let einleitung_vers03 = `${setup_einleitung_vers03()}`;
-let einleitung = `${einleitung_vers01}</br>${einleitung_vers02},</br>${einleitung_vers03}`;
-ursonate.push(einleitung);
+let einleitung_heading = {'category': 'heading', 'content': 'einleitung'};
+let einleitung_content = {'category': 'paragraph', 'content': `${einleitung_vers01}</br>${einleitung_vers02},</br>${einleitung_vers03}`};
+ursonate.push(einleitung_heading, einleitung_content);
 
 // creating each line
 function setup_einleitung_vers03_zeile(array1, array2, line) {
@@ -56,7 +58,7 @@ function setup_einleitung_vers03(){
 */
 let erster_teil_vers02_start = 'dedesnn nn rrrrrr';
 let erster_teil_vers02_mid = 'li ee';
-let erster_teil_vers02_end = 'mpiff tillff too, tillll, jüü kaa';
+let erster_teil_vers02_end = 'mpiff tillff too,</br>tillll,</br>jüü kaa';
 let kete = 'kete';
 let ra = 'ra';
 let rinnz = 'rinnz';
@@ -64,28 +66,44 @@ let krmue = 'krrmüü';
 let ziuenzeziu = 'ziiuu ennze ziiuu';
 let erster_teil_vers04 = 'rrummpff tillff toooo';
 
-let erster_teil_vers02 = `${erster_teil_vers02_start}, ${erster_teil_vers02_mid}, ${erster_teil_vers02_end}?`
-let erster_teil_vers03 = setup_erster_teil_vers03();
-let erster_teil = `${einleitung_vers01}</br>${erster_teil_vers02}</br>${erster_teil_vers03}</br>${erster_teil_vers04}?`;
-ursonate.push(erster_teil);
+let erster_teil_heading = {'category': 'heading', 'content': 'erster teil'};
+let erster_teil_subheading01 = {'category': 'subheading', 'content': 'thema 1'};
+let erster_teil_thema01_content = {'category': 'paragraph', 'content': einleitung_vers01};
+let erster_teil_subheading02 = {'category': 'subheading', 'content': 'thema 2'};
+let erster_teil_thema02_content = {'category': 'paragraph', 'content': `${erster_teil_vers02_start},</br>${erster_teil_vers02_mid},
+</br>${erster_teil_vers02_end}?`};
+let erster_teil_subheading03 = {'category': 'subheading', 'content': 'thema 3'};
+let erster_teil_thema03_content = {'category': 'paragraph', 'content': setup_erster_teil_vers03()}
+let erster_teil_subheading04 = {'category': 'subheading', 'content': 'thema 4'};
+let erster_teil_thema04_content = {'category': 'paragraph', 'content': `${erster_teil_vers04}?`};
+
+ursonate.push(erster_teil_heading, erster_teil_subheading01, erster_teil_thema01_content, erster_teil_subheading02,
+    erster_teil_thema02_content, erster_teil_subheading03, erster_teil_thema03_content, erster_teil_subheading04, erster_teil_thema04_content);
 
 function setup_erster_teil_vers03() {
-    return `${rinnz}e${kete} ${multiply_string("bee", 2)} ${rinnz.slice(2, 5)}${krmue}? ${ziuenzeziu} ${rinnz}${krmue}, ${ra}${kete} ${multiply_string('bee', 2)}.`;
+    return `${rinnz}e${kete} ${repeat_string(bee, 2)} ${rinnz.slice(2, 5)}${krmue}?</br>${ziuenzeziu} ${rinnz}${krmue},
+</br>${ra}${kete} ${repeat_string(bee, 2)}.`;
 }
-function multiply_string(string, factor){
-    let resultString = '';
-    for(let i=0; i<factor; i++){
-        resultString += `${string} `;
-    }
-    return resultString.trim();
-}
+
 
 // create Ursonate
 let section_ursonate = document.getElementById("ursonate");
 ursonate.forEach(function (element) {
-    let paragraph = document.createElement('p');
-    paragraph.innerHTML = element;
-    section_ursonate.appendChild(paragraph);
+    let node;
+    let category = element.category;
+    switch (category){
+        case 'heading':
+            node = document.createElement('h3');
+            break;
+        case 'subheading':
+            node = document.createElement('h4');
+            break;
+        case 'paragraph':
+            node = document.createElement('p');
+            break;
+    }
+    node.innerHTML = element.content;
+    section_ursonate.appendChild(node);
 });
 
 // adds whitespace after each element
@@ -98,5 +116,13 @@ function add_whitespaces_to_line(array, trim) {
         line.trim()
     }
     return line;
+}
+
+function repeat_string(string, factor){
+    let resultString = '';
+    for(let i=0; i<factor; i++){
+        resultString += `${string} `;
+    }
+    return resultString.trim();
 }
 
