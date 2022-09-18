@@ -19,7 +19,7 @@ const rrr = repeat_string('r', 6, false);
 const bee = variation_of_ee('b');
 const einleitung_vers03_array01 = [dll, rrr, bee, boe];
 const einleitung_vers03_array02 = [fuemms, boe, woe, taeae, zaeae, uu];
-const einleitung_vers01 = `${fuemms} ${boe} ${woe} ${taeae} ${zaeae} ${uu},</br>${poegiff},</br>${kwii} ${ee}.`;
+const einleitung_vers01 = `${print_array(einleitung_vers03_array02)},</br>${poegiff},</br>${kwii} ${ee}.`;
 const einleitung_vers02 = `${oooo}`
 const einleitung_vers03 = `${setup_einleitung_vers03()}`;
 const einleitung_heading = {'category': 'heading', 'content': 'einleitung'};
@@ -69,6 +69,7 @@ const ziuenzeziu = 'ziiuu ennze ziiuu';
 const erster_teil_vers03_a = `${rinnz.slice(2, 5)}${krmue}`;
 const erster_teil_vers03_b = `${ziuenzeziu} ${rinnz}${krmue}`
 const erster_teil_vers04 = 'rrummpff tillff toooo';
+const rinzekete = `${rinnz}e${kete}`;
 
 const erster_teil_heading = {'category': 'heading', 'content': 'erster teil'};
 const erster_teil_subheading01 = {'category': 'subheading', 'content': 'thema 1'};
@@ -85,7 +86,7 @@ ursonate.push(erster_teil_heading, erster_teil_subheading01, erster_teil_thema01
     erster_teil_thema02_content, erster_teil_subheading03, erster_teil_thema03_content, erster_teil_subheading04, erster_teil_thema04_content);
 
 function setup_erster_teil_vers03() {
-    return `${rinnz}e${kete} ${repeat_string(bee, 2, true)} ${erster_teil_vers03_a}?</br>${erster_teil_vers03_b},
+    return `${rinzekete} ${repeat_string(bee, 2, true)} ${erster_teil_vers03_a}?</br>${erster_teil_vers03_b},
 </br>${rakete_variation_of_ee('b')}.`;
 }
 
@@ -115,6 +116,30 @@ const ueberleitung_vers01 = {'category': 'paragraph', 'content': `${ziuenzeziu} 
 const ueberleitung_vers02 = {'category': 'paragraph', 'content': `${rakete_variation_of_ee('b')}? ${rakete_variation_of_ee('z')}.`};
 
 ursonate.push(ueberleitung_heading, ueberleitung_vers01, ueberleitung_vers02);
+
+/*  ----------
+    durcharbeitung
+    ----------
+*/
+const durcharbeitung_heading = {'category': 'heading', 'content': 'durcharbeitung'};
+const durcharbeitung_vers01b_content = `${einleitung_vers03_array02[einleitung_vers03_array02.length -1]} ${variation_of_ee('z')} ${variation_of_ee('t')}
+ ${variation_of_ee('w')} ${variation_of_ee('b')} ${einleitung_vers03_array02[0]}.`;
+const durcharbeitung_vers01a = {'category': 'paragraph', 'content': `${print_array(einleitung_vers03_array02)},</br>${durcharbeitung_vers01b_content}`};
+let durcharbeitung_vers_02_line = `${ra}${kete} ${rinzekete}</br>`;
+let durcharbeitung_vers_02_content = '';
+for(let i = 0; i < 7; i++){
+    durcharbeitung_vers_02_content += durcharbeitung_vers_02_line;
+}
+const durcharbeitung_vers_02 = {'category': 'paragraph', 'content': `${durcharbeitung_vers_02_content}${bee}</br>${boe},`};
+
+ursonate.push(durcharbeitung_heading, durcharbeitung_vers01a, durcharbeitung_vers_02);
+
+
+
+
+
+
+
 
 // create Ursonate
 const section_ursonate = document.getElementById("ursonate");
@@ -159,5 +184,13 @@ function repeat_string(string, factor, whitespaces){
         }
     }
     return resultString.trim();
+}
+
+function print_array(array){
+    let line = '';
+    array.forEach(function (word){
+        line += `${word} `;
+    });
+    return line.trim();
 }
 
