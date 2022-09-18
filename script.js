@@ -29,19 +29,14 @@ function setup_einleitung_vers03_zeile(array1, array2, line) {
     let mapped_array1 = array1.filter((element, index) =>
         index > (line - 3)
     );
-    if (line === 1){
-        zeile = add_whitespaces_to_line_except_last(mapped_array1);
-    }
-    else {
-        zeile = add_whitespaces_to_line(mapped_array1);
-    }
+    zeile = add_whitespaces_to_line(mapped_array1, true);
     if (line > 1){
         let mapped_array2 = array2.filter((element, index) =>
             index <= (line -1)
         );
-        zeile += add_whitespaces_to_line_except_last(mapped_array2);
+        zeile += add_whitespaces_to_line(mapped_array2, true);
     }
-    return zeile;
+    return zeile.trim();
 }
 // creating block
 function setup_einleitung_vers03(){
@@ -75,12 +70,12 @@ let erster_teil = `${einleitung_vers01}</br>${erster_teil_vers02}</br>${erster_t
 ursonate.push(erster_teil);
 
 function setup_erster_teil_vers03() {
-    return `${rinnz}e${kete} ${double_bee()} ${rinnz.slice(2, 5)}${krmue}? ${ziuenzeziu} ${rinnz}${krmue}, ${ra}${kete} ${double_bee()}.`;
+    return `${rinnz}e${kete} ${multiply_string("bee", 2)} ${rinnz.slice(2, 5)}${krmue}? ${ziuenzeziu} ${rinnz}${krmue}, ${ra}${kete} ${multiply_string('bee', 2)}.`;
 }
-function double_bee(){
+function multiply_string(string, factor){
     let resultString = '';
-    for(let i=0; i<2; i++){
-        resultString += `${bee} `;
+    for(let i=0; i<factor; i++){
+        resultString += `${string} `;
     }
     return resultString.trim();
 }
@@ -94,21 +89,14 @@ ursonate.forEach(function (element) {
 });
 
 // adds whitespace after each element
-function add_whitespaces_to_line(array) {
+function add_whitespaces_to_line(array, trim) {
     let line = '';
-    array.forEach(function (element, index) {
+    array.forEach(function (element) {
         line += `${element} `;
     });
+    if(trim){
+        line.trim()
+    }
     return line;
 }
-// adds whitespace after each element, except for the last one for adding . or , at the ending
-function add_whitespaces_to_line_except_last(array) {
-    let line = '';
-    array.forEach(function (element, index) {
-        if(index < (array.length -1)) {
-            line += `${element} `;
-        }
-        else line += `${element}`;
-    });
-    return line;
-}
+
