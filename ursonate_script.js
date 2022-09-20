@@ -19,7 +19,7 @@ const rrr = repeat_string('r', 6, false);
 const bee = variation_of_ee('b');
 const einleitung_vers03_array01 = [dll, rrr, bee, boe];
 const einleitung_vers03_array02 = [fuemms, boe, woe, taeae, zaeae, uu];
-const einleitung_vers01 = `${print_array(einleitung_vers03_array02)},</br>${poegiff},</br>${kwii} ${ee}.`;
+const einleitung_vers01 = `${print_array(einleitung_vers03_array02, true)},</br>${poegiff},</br>${kwii} ${ee}.`;
 const einleitung_vers02 = `${oooo}`
 const einleitung_vers03 = `${setup_einleitung_vers03()}`;
 const einleitung_heading = {'category': 'heading', 'content': 'einleitung'};
@@ -124,7 +124,7 @@ ursonate.push(ueberleitung_heading, ueberleitung_vers01, ueberleitung_vers02);
 const durcharbeitung_heading = {'category': 'heading', 'content': 'durcharbeitung'};
 const durcharbeitung_vers01b_content = `${einleitung_vers03_array02[einleitung_vers03_array02.length -1]} ${variation_of_ee('z')} ${variation_of_ee('t')}
  ${variation_of_ee('w')} ${variation_of_ee('b')} ${einleitung_vers03_array02[0]}.`;
-const durcharbeitung_vers01a = {'category': 'paragraph', 'content': `${print_array(einleitung_vers03_array02)},</br>${durcharbeitung_vers01b_content}`};
+const durcharbeitung_vers01a = {'category': 'paragraph', 'content': `${print_array(einleitung_vers03_array02), true},</br>${durcharbeitung_vers01b_content}`};
 let durcharbeitung_vers_02_line = `${ra}${kete} ${rinzekete}</br>`;
 let durcharbeitung_vers_02_content = '';
 for(let i = 0; i < 7; i++){
@@ -132,12 +132,37 @@ for(let i = 0; i < 7; i++){
 }
 const durcharbeitung_vers_02 = {'category': 'paragraph', 'content': `${durcharbeitung_vers_02_content}${bee}</br>${boe},`};
 
-ursonate.push(durcharbeitung_heading, durcharbeitung_vers01a, durcharbeitung_vers_02);
+
+let durcharbeitung_vers_03_content = '';
+let block = '';
+let alternative01 = einleitung_vers03_array02;
+alternative01.push(poegiff.substr(0, 2));
+alternative01.push(poegiff.substr(2, 5));
+let alternative02 = alternative01.slice(1, 8);
+alternative02.splice(2, 0, 'rö');
+for (let i = 1; i < alternative01.length; i++){
+    let line = '';
+    for (let j = 0; j < i; j++){
+        line += alternative01[j];
+    }
+    block = `${line}${alternative01[i]}`;
+    durcharbeitung_vers_03_content += `${block}</br>`;
+}
+
+for (let i = 1; i < alternative02.length; i++){
+    let line = '';
+    for (let j = 0; j < i; j++){
+        line += alternative02[j];
+    }
+    block = `${line}${alternative02[i]}`;
+    durcharbeitung_vers_03_content += `${block}</br>`;
+}
 
 
 
+const durcharbeitung_vers_03 = {'category': 'paragraph', 'content': durcharbeitung_vers_03_content};
 
-
+ursonate.push(durcharbeitung_heading, durcharbeitung_vers01a, durcharbeitung_vers_02, durcharbeitung_vers_03);
 
 
 
@@ -186,11 +211,15 @@ function repeat_string(string, factor, whitespaces){
     return resultString.trim();
 }
 
-function print_array(array){
+function print_array(array, whitespaces){
     let line = '';
     array.forEach(function (word){
-        line += `${word} `;
+        if(whitespaces){
+            line += `${word} `;
+        }
+        else{
+            line += `${word}`;
+        }
     });
     return line.trim();
 }
-
