@@ -124,45 +124,87 @@ ursonate.push(ueberleitung_heading, ueberleitung_vers01, ueberleitung_vers02);
 const durcharbeitung_heading = {'category': 'heading', 'content': 'durcharbeitung'};
 const durcharbeitung_vers01b_content = `${einleitung_vers03_array02[einleitung_vers03_array02.length -1]} ${variation_of_ee('z')} ${variation_of_ee('t')}
  ${variation_of_ee('w')} ${variation_of_ee('b')} ${einleitung_vers03_array02[0]}.`;
-const durcharbeitung_vers01a = {'category': 'paragraph', 'content': `${print_array(einleitung_vers03_array02), true},</br>${durcharbeitung_vers01b_content}`};
+const durcharbeitung_vers01a = {'category': 'paragraph', 'content': `${print_array(einleitung_vers03_array02, true)},</br>${durcharbeitung_vers01b_content}`};
 let durcharbeitung_vers_02_line = `${ra}${kete} ${rinzekete}</br>`;
 let durcharbeitung_vers_02_content = '';
-for(let i = 0; i < 7; i++){
+for(let i = 0; i < 6; i++){
     durcharbeitung_vers_02_content += durcharbeitung_vers_02_line;
 }
 const durcharbeitung_vers_02 = {'category': 'paragraph', 'content': `${durcharbeitung_vers_02_content}${bee}</br>${boe},`};
-
-
-let durcharbeitung_vers_03_content = '';
+// vers3
+let twochar1 = create_new_2char_laut(fuemms, boe);
+let durcharbeitung_vers_03_content_A_B = `${twochar1}</br>`;
+let durcharbeitung_vers_03_content_A_array = [];
+let durcharbeitung_vers_03_content_B_array = [];
+let durcharbeitung_vers_03_content_C_array = [];
 let block = '';
 let alternative01 = einleitung_vers03_array02;
 alternative01.push(poegiff.substr(0, 2));
 alternative01.push(poegiff.substr(2, 5));
 let alternative02 = alternative01.slice(1, 8);
-alternative02.splice(2, 0, 'rö');
-for (let i = 1; i < alternative01.length; i++){
-    let line = '';
-    for (let j = 0; j < i; j++){
-        line += alternative01[j];
-    }
-    block = `${line}${alternative01[i]}`;
-    durcharbeitung_vers_03_content += `${block}</br>`;
+let twochar2 = create_new_2char_laut(ra, boe);
+alternative02.splice(2, 0, twochar2);
+let alternative03 = alternative02.splice(2, 0, boe);
+alternative03.splice(3, 0, poegiff.slice(0, 2));
+
+
+durcharbeitung_vers_03_content_A_array = iterate_durcharbeitung_vers_03(alternative01);
+durcharbeitung_vers_03_content_B_array = iterate_durcharbeitung_vers_03(alternative02);
+durcharbeitung_vers_03_content_C_array = iterate_durcharbeitung_vers_03(alternative03);
+durcharbeitung_vers_03_content_A_B += setup_durcharbeitung_vers_03(durcharbeitung_vers_03_content_A_array, durcharbeitung_vers_03_content_B_array);
+
+function create_new_2char_laut(string1, string2){
+    return `${string1[0]}${string2[1]}`
 }
 
-for (let i = 1; i < alternative02.length; i++){
-    let line = '';
-    for (let j = 0; j < i; j++){
-        line += alternative02[j];
+// work through array and return a new own
+function iterate_durcharbeitung_vers_03(array) {
+    let result_string = '';
+    let result_array=[];
+    for (let i = 1; i < array.length; i++){
+        let line = '';
+        for (let j = 0; j < i; j++){
+            line += array[j];
+        }
+        block = `${line}${array[i]}`;
+        result_string = `${block}</br>`;
+        result_array.push(result_string);
     }
-    block = `${line}${alternative02[i]}`;
-    durcharbeitung_vers_03_content += `${block}</br>`;
+    return result_array;
 }
 
+function setup_durcharbeitung_vers_03(array1, array2){
+    let result_string = '';
+    for(let i =0; i < array1.length; i++){
+        result_string += array2[i];
+        result_string += array1[i];
+    }
+    return result_string;
+}
 
+const durcharbeitung_vers_03 = {'category': 'paragraph', 'content': `${durcharbeitung_vers_03_content_A_B}${kwii}${ee}.`};
 
-const durcharbeitung_vers_03 = {'category': 'paragraph', 'content': durcharbeitung_vers_03_content};
+// vers4
+let vers4_block1 = create_block_repeating_six_lines(durcharbeitung_vers_03_content_B_array[0].substr(0,2));
+let vers4_phrase2 = durcharbeitung_vers_03_content_B_array[0].substr(0,4);
+vers4_block1 += create_block_repeating_six_lines(vers4_phrase2);
+let vers4_phrase3 = `${durcharbeitung_vers_03_content_B_array[1].substr(0, 6)}`
+vers4_block1 += create_block_repeating_six_lines(vers4_phrase3);
 
-ursonate.push(durcharbeitung_heading, durcharbeitung_vers01a, durcharbeitung_vers_02, durcharbeitung_vers_03);
+function create_block_repeating_six_lines(string){
+    let result_string = '';
+    let repetition = 0;
+    while (repetition < 6){
+        result_string += `${string}</br>`
+        repetition ++;
+    }
+    return result_string;
+}
+
+const durcharbeitung_vers04 = {'category': 'paragraph', 'content': `${vers4_block1}`}
+
+ursonate.push(durcharbeitung_heading, durcharbeitung_vers01a, durcharbeitung_vers_02, durcharbeitung_vers_03,
+    durcharbeitung_vers_02, durcharbeitung_vers_03, durcharbeitung_vers_02, durcharbeitung_vers04);
 
 
 
