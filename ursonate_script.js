@@ -144,13 +144,9 @@ alternative01.push(poegiff.substr(2, 5));
 let alternative02 = alternative01.slice(1, 8);
 let twochar2 = create_new_2char_laut(ra, boe);
 alternative02.splice(2, 0, twochar2);
-let alternative03 = alternative02.splice(2, 0, boe);
-alternative03.splice(3, 0, poegiff.slice(0, 2));
-
 
 durcharbeitung_vers_03_content_A_array = iterate_durcharbeitung_vers_03(alternative01);
 durcharbeitung_vers_03_content_B_array = iterate_durcharbeitung_vers_03(alternative02);
-durcharbeitung_vers_03_content_C_array = iterate_durcharbeitung_vers_03(alternative03);
 durcharbeitung_vers_03_content_A_B += setup_durcharbeitung_vers_03(durcharbeitung_vers_03_content_A_array, durcharbeitung_vers_03_content_B_array);
 
 function create_new_2char_laut(string1, string2){
